@@ -1,5 +1,7 @@
+import CheckboxGroup from '@/components/CheckboxGroup.vue'
 import DropDown from '@/components/DropDown.vue'
 import TelephoneNumber from '@/components/TelephoneNumber.vue'
+import Text from '@/components/Text.vue'
 import TextInput from '@/components/TextInput.vue'
 
 export const formSchema = [
@@ -17,7 +19,7 @@ export const formSchema = [
   },
   {
     fieldType: DropDown,
-    name: 'dropDown',
+    name: 'intrest',
     label: 'Interest',
     required: true,
     options: [
@@ -25,18 +27,22 @@ export const formSchema = [
                 "Oceans",
                 "Deserts",
             ]
+  },
+  {
+      fieldType: Text,
+      name: 'description',
+      label: 'Description',
+      required: false,
+  },
+  {
+      fieldType: CheckboxGroup,
+      name: 'travel',
+      label: 'Travel',
+      required: true,
+      options: [
+          "Car",
+          "Bus",
+          "Train",
+      ]
   }
-  // {
-  //     fieldType: InputType.TEXT,
-  //     label: 'Description',
-  // },
-  // {
-  //     fieldType: InputType.CHECK_BOX_GROUP,
-  //     label: 'Travel',
-  //     options: [
-  //         "Car",
-  //         "Bus",
-  //         "Train",
-  //     ]
-  // }
 ]
