@@ -14,6 +14,7 @@ const formData = ref({})
     v-bind="field"
   >
   </component>
+  <span>{{ formData }}</span>
 </template>
 
 <style></style>
