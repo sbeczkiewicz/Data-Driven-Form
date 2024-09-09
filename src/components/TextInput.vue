@@ -56,7 +56,5 @@ onMounted(() => {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.error {
-  color: red;
-}
+
 </style>

@@ -8,6 +8,8 @@ const formErrors = ref([])
 
 const showErrorAtSubmit = ref(false)
 
+const submitted = ref(false)
+
 function handleValidation(field, error) {
   if (error) {
     formErrors.value.push(`${field}: ${error}`)
@@ -19,17 +21,21 @@ function handleValidation(field, error) {
 function handleSubmit() {
   if (formErrors.value.length === 0) {
     // Submit form
-    // change to other view
     alert('Form Submitted')
+    submitted.value = true
   } else {
     showErrorAtSubmit.value = true
-    alert('Errors!')
   }
 }
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit">
+  <div class="container">
+    <header>
+    <h1>Data Driven Form</h1>
+  </header>
+
+  <form v-if="!submitted"  @submit.prevent="handleSubmit">
     <component
       v-for="(field, index) in formSchema"
       :is="field.fieldType"
@@ -42,8 +48,12 @@ function handleSubmit() {
     </component>
     <button type="submit">Submit</button>
   </form>
+  <div v-else>
+    <span>{{ formData }}</span>
+  </div>
 
-  <span>{{ formData }}</span>
+  </div>
+  
 </template>
 
 <style></style>

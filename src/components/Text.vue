@@ -32,24 +32,20 @@ function validate() {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div>
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
     <textarea v-model="localValue" @blur="validate" />
-    <span :title="errorMessage" :class="errorMessage ? 'error' : null">{{
+    <span :title="errorMessage" :class="errorMessage ? 'error counter' : 'counter'">{{
       `${props.modelValue ? props.modelValue.length : 0}/500`
     }}</span>
   </div>
 </template>
 
 <style>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.error {
-  color: red;
-}
+    .error {
+        color: red;
+    }
+    .counter {
+        float: right;
+    }
 </style>
