@@ -8,7 +8,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-
 </script>
 
 <template>

@@ -22,27 +22,19 @@ export const formSchema = [
     name: 'intrest',
     label: 'Interest',
     required: true,
-    options: [
-                "Mountains",
-                "Oceans",
-                "Deserts",
-            ]
+    options: ['Mountains', 'Oceans', 'Deserts']
   },
   {
-      fieldType: Text,
-      name: 'description',
-      label: 'Description',
-      required: false,
+    fieldType: Text,
+    name: 'description',
+    label: 'Description',
+    required: false
   },
   {
-      fieldType: CheckboxGroup,
-      name: 'travel',
-      label: 'Travel',
-      required: true,
-      options: [
-          "Car",
-          "Bus",
-          "Train",
-      ]
+    fieldType: CheckboxGroup,
+    name: 'travel',
+    label: 'Travel',
+    required: true,
+    options: ['Car', 'Bus', 'Train']
   }
 ]
