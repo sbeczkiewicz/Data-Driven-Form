@@ -9,23 +9,22 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const errors = computed(() => {
-  const errorArray = []
-  if (!props.modelValue || props.modelValue?.length < 3) {
-    errorArray.push('Full Name must be at least 3 characters')
+const checkDigit = (event: KeyboardEvent) => {
+  if (event.key.length === 1 && isNaN(Number(event.key))) {
+    event.preventDefault()
   }
-  if (!props.modelValue) {
-    errorArray.push('Full Name is Required')
-  }
-  return errorArray
-})
+}
 </script>
 
 <template>
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
-    <input :value="modelValue" @input="emit('update:modelValue', $event.target.value)" />
-    <span v-for="error in errors" class="error">{{ error }}</span>
+    <input
+      :value="modelValue"
+      type="number"
+      @keydown="checkDigit"
+      @input="emit('update:modelValue', $event.target.value)"
+    />
   </div>
 </template>
 
@@ -36,8 +35,5 @@ const errors = computed(() => {
   max-width: 300px;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-.error {
-  color: red;
 }
 </style>
