@@ -7,7 +7,7 @@ const props = defineProps({
   options: { type: Array, required: true, default: [] },
   showErrorAtSubmit: { type: Boolean, required: true },
   validations: { type: Array, default: [] },
-  modelValue: { type: Array, default: [] }
+  modelValue: { type: String, default: '' }
 })
 
 const emit = defineEmits(['update:modelValue', 'validate'])
@@ -33,6 +33,19 @@ function validate() {
   }
   emit('validate', errorMessage.value)
 }
+
+function isChecked(value) {
+  return localValue.value === value;
+}
+
+function handleChange(value) {
+  if (localValue.value === value) {
+    localValue.value = ''
+  } else {
+    localValue.value = value
+  }
+}
+
 onMounted(() => {
   validate()
 })
@@ -42,7 +55,11 @@ onMounted(() => {
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
     <div v-for="option in options">
-      <input type="checkbox" :id="option" :value="option" v-model="localValue" />
+      <input type="checkbox" 
+        :id="option"
+        :value="option"  
+        @change="handleChange(option)"
+        :checked="isChecked(option)" />
       <label :for="option.value">{{ option }}</label>
     </div>
     <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error">{{
