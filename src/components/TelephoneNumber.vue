@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
   required: { type: Boolean, required: true },
-  modelValue: String
+  modelValue: { type: String, default: '' }
 })
 
 const emit = defineEmits(['update:modelValue'])

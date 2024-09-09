@@ -1,19 +1,40 @@
 <script setup lang="ts">
-import { computed, watch, ref } from 'vue'
+import { watch, ref, onMounted } from 'vue'
 const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
   required: { type: Boolean, required: true },
   options: { type: Array, required: true, default: [] },
+  showErrorAtSubmit: { type: Boolean, required: true },
+  validations: { type: Array, default: [] },
   modelValue: { type: Array, default: [] }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'validate'])
 
-const selectedValues = ref(props.modelValue || [])
+const localValue = ref(props.modelValue)
+const errorMessage = ref('')
+const showErrorMessage = ref(false)
 
-watch(selectedValues, (newValue) => {
+watch(localValue, (newValue) => {
   emit('update:modelValue', newValue)
+  showErrorMessage.value = true
+  validate()
+})
+
+function validate() {
+  errorMessage.value = ''
+  for (const validation of props.validations) {
+    const result = validation(props.label, localValue.value)
+    if (result) {
+      errorMessage.value = result
+      break
+    }
+  }
+  emit('validate', errorMessage.value)
+}
+onMounted(() => {
+  validate()
 })
 </script>
 
@@ -21,9 +42,12 @@ watch(selectedValues, (newValue) => {
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
     <div v-for="option in options">
-      <input type="checkbox" :id="option" :value="option" v-model="selectedValues" />
+      <input type="checkbox" :id="option" :value="option" v-model="localValue" />
       <label :for="option.value">{{ option }}</label>
     </div>
+    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error">{{
+      errorMessage
+    }}</span>
   </div>
 </template>
 

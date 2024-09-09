@@ -1,34 +1,55 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
   required: { type: Boolean, required: true },
   options: { type: Array, required: true, default: [] },
-  modelValue: String
+  showErrorAtSubmit: { type: Boolean, required: true },
+  validations: { type: Array, default: [] },
+  modelValue: { type: String, default: '' }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'validate'])
 
-const errors = computed(() => {
-  const errorArray = []
+const localValue = ref(props.modelValue)
+const errorMessage = ref('')
+const showErrorMessage = ref(false)
 
-  //TODO verify validation
-  if (!props.modelValue) {
-    errorArray.push('Intrest selection is Required')
+watch(localValue, (newValue) => {
+  emit('update:modelValue', newValue)
+  showErrorMessage.value = true
+  validate()
+})
+
+function validate() {
+  errorMessage.value = ''
+  for (const validation of props.validations) {
+    const result = validation(props.label, localValue.value)
+    if (result) {
+      errorMessage.value = result
+      break
+    }
   }
-  return errorArray
+  emit('validate', errorMessage.value)
+}
+
+onMounted(() => {
+  validate()
 })
 </script>
 
 <template>
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
-    <select :value="props.modelValue" @change="emit('update:modelValue', $event.target.value)">
+    <select v-model="localValue" @blur="validate">
       <option v-for="option in options" :key="option">
         {{ option }}
       </option>
     </select>
+    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error">{{
+      errorMessage
+    }}</span>
   </div>
 </template>
 
