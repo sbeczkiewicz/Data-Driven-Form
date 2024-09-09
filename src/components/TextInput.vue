@@ -42,19 +42,8 @@ onMounted(() => {
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
     <input @blur="validate" v-model="localValue" />
-    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error">{{
+    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
       errorMessage
     }}</span>
   </div>
 </template>
-
-<style>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-</style>

@@ -27,12 +27,3 @@ const checkDigit = (event: KeyboardEvent) => {
   </div>
 </template>
 
-<style>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-</style>

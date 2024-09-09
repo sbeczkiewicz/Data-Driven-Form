@@ -62,18 +62,8 @@ onMounted(() => {
         :checked="isChecked(option)" />
       <label :for="option.value">{{ option }}</label>
     </div>
-    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error">{{
+    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
       errorMessage
     }}</span>
   </div>
 </template>
-
-<style>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-</style>

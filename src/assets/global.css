@@ -28,7 +28,7 @@ select {
   padding: 0.5em;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   width: 100%;
 }
 
@@ -52,4 +52,21 @@ button {
 }
 button:hover {
   background-color: #0056b3;
+}
+
+.error-sm {
+  color: red;
+  font-size: 12px;
+}
+
+.error {
+  color: red;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin-top: 10px;
+  margin-bottom: 1em;
 }
