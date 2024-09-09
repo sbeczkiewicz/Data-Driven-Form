@@ -26,4 +26,3 @@ const checkDigit = (event: KeyboardEvent) => {
     />
   </div>
 </template>
-

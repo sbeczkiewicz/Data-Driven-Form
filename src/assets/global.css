@@ -27,6 +27,7 @@ select {
   font-size: 1em;
   padding: 0.5em;
   border: 1px solid var(--border-color);
+  box-sizing: border-box;
   border-radius: 4px;
   margin-bottom: 0.5em;
   width: 100%;
@@ -66,7 +67,7 @@ button:hover {
 .wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  max-width: 500px;
   margin-top: 10px;
   margin-bottom: 1em;
 }

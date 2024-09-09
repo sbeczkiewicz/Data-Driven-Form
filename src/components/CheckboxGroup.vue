@@ -35,7 +35,7 @@ function validate() {
 }
 
 function isChecked(value) {
-  return localValue.value === value;
+  return localValue.value === value
 }
 
 function handleChange(value) {
@@ -55,11 +55,13 @@ onMounted(() => {
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
     <div v-for="option in options">
-      <input type="checkbox" 
+      <input
+        type="checkbox"
         :id="option"
-        :value="option"  
+        :value="option"
         @change="handleChange(option)"
-        :checked="isChecked(option)" />
+        :checked="isChecked(option)"
+      />
       <label :for="option.value">{{ option }}</label>
     </div>
     <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
