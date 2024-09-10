@@ -13,6 +13,8 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'validate'])
 
 const localValue = ref(props.modelValue)
+
+// Field Validation
 const errorMessage = ref('')
 const showErrorMessage = ref(false)
 
@@ -34,6 +36,7 @@ function validate() {
   emit('validate', errorMessage.value)
 }
 
+//Ensures only one value is checked at a time
 function isChecked(value) {
   return localValue.value === value
 }

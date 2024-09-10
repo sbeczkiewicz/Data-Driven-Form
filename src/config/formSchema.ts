@@ -15,13 +15,13 @@ export const formSchema = [
   },
   {
     fieldType: TelephoneNumber,
-    name: 'telephoneNumber',
+    name: 'phone',
     label: 'Phone',
     required: false
   },
   {
     fieldType: DropDown,
-    name: 'intrest',
+    name: 'interest',
     label: 'Interest',
     required: true,
     validations: [requiredRule],

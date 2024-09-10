@@ -11,6 +11,8 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'validate'])
 
 const localValue = ref(props.modelValue)
+
+//Field Validation
 const errorMessage = ref('')
 
 watch(localValue, (newValue) => {
@@ -42,9 +44,6 @@ function validate() {
 </template>
 
 <style scoped>
-.error {
-  color: red;
-}
 .counter {
   text-align: right;
 }

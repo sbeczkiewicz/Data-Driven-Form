@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { formSchema } from '@/config/formSchema.ts'
+import { formSchema } from '@/config/formSchema'
 import { ref, watch, computed } from 'vue'
 import { useFormStore } from '@/stores/formStore'
 import SubmitedDisplay from '@/components/SubmittedDisplay.vue'
 
-const formErrors = ref([])
-
-const showErrorAtSubmit = ref(false)
-
 const submitted = ref(false)
 
-function handleValidation(field, error) {
+// Form Validation
+// Will force show error messages on clicking submit
+const formErrors = ref([])
+const showErrorAtSubmit = ref(false)
+
+function handleValidation(field: any, error: any) {
   if (error) {
     formErrors.value.push(`${field}: ${error}`)
   } else {
@@ -28,14 +29,13 @@ function handleSubmit() {
 
 // Centralized State Management
 const formStore = useFormStore()
-
 const formData = computed(() => formStore.formData)
 
 watch(
   formData,
   (newData, oldData) => {
     if (JSON.stringify(newData) !== JSON.stringify(oldData)) {
-      formStore.saveStateToStorage()
+      formStore.updateFormData(newData)
     }
   },
   { deep: true }

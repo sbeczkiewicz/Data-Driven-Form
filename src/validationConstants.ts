@@ -1,3 +1,5 @@
+// Validation functions passed to components.
+// Return error message string if invalid.
 export const requiredRule = (label: string, value: any) =>
   !value || value.length === 0 ? `${label} is required` : null
 export const minLengthRule = (label: string, value: any) =>

@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useFormStore } from '@/stores/formStore'
 
-// Use central state to display submitted data
+// Access submitted data from central state
 const formStore = useFormStore()
 const formData = computed(() => formStore.formData)
 
@@ -21,7 +21,7 @@ function formatCamelCase(str) {
   </div>
 </template>
 
-<style>
+<style scoped>
 .display-container {
   float: left;
   gap: 12px;
@@ -33,14 +33,13 @@ function formatCamelCase(str) {
   margin: 16px auto;
 }
 
-
 .display-item {
   padding: 8px;
   border-bottom: 1px solid #ddd;
   width: 380px;
   white-space: nowrap;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .display-item:last-child {
