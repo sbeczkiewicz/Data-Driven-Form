@@ -1,7 +1,7 @@
 import CheckboxGroup from '@/components/CheckboxGroup.vue'
 import DropDown from '@/components/DropDown.vue'
 import TelephoneNumber from '@/components/TelephoneNumber.vue'
-import Text from '@/components/Text.vue'
+import TextArea from '@/components/TextArea.vue'
 import TextInput from '@/components/TextInput.vue'
 import { maxLengthRule, minLengthRule, requiredRule } from '@/validationConstants'
 
@@ -28,7 +28,7 @@ export const formSchema = [
     options: ['Mountains', 'Oceans', 'Deserts']
   },
   {
-    fieldType: Text,
+    fieldType: TextArea,
     name: 'description',
     label: 'Description',
     required: false,

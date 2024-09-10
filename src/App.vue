@@ -59,8 +59,8 @@ watch(
         @validate="handleValidation(field.name, $event)"
       >
       </component>
-      <hr/>
-      <button style="float: right;" type="submit">Submit</button>
+      <hr />
+      <button style="float: right" type="submit">Submit</button>
     </form>
     <SubmitedDisplay v-else></SubmitedDisplay>
   </div>

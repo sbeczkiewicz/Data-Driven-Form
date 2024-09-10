@@ -4,9 +4,9 @@ const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
   required: { type: Boolean, required: true },
-  options: { type: Array, required: true, default: [] },
+  options: { type: Array, required: true, default: () => [] },
   showErrorAtSubmit: { type: Boolean, required: true },
-  validations: { type: Array, default: [] },
+  validations: { type: Array, default: () => [] },
   modelValue: { type: String, default: '' }
 })
 
@@ -34,8 +34,8 @@ function validate() {
 }
 
 function validateAndShowMessage() {
-    validate()
-    showErrorMessage.value = true
+  validate()
+  showErrorMessage.value = true
 }
 
 onMounted(() => {
@@ -52,9 +52,9 @@ onMounted(() => {
       </option>
     </select>
     <Transition name="fade" mode="out-in">
-        <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
+      <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
         errorMessage
-        }}</span>
+      }}</span>
     </Transition>
   </div>
 </template>

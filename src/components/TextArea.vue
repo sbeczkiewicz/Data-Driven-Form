@@ -4,7 +4,7 @@ const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
   required: { type: Boolean, required: true },
-  validations: { type: Array, default: [] },
+  validations: { type: Array, default: () => [] },
   modelValue: { type: String, default: '' }
 })
 

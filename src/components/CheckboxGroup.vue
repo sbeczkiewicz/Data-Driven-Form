@@ -4,9 +4,9 @@ const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
   required: { type: Boolean, required: true },
-  options: { type: Array, required: true, default: [] },
+  options: { type: Array, required: true, default: () => [] },
   showErrorAtSubmit: { type: Boolean, required: true },
-  validations: { type: Array, default: [] },
+  validations: { type: Array, default: () => [] },
   modelValue: { type: String, default: '' }
 })
 
@@ -54,7 +54,7 @@ onMounted(() => {
 <template>
   <div class="wrapper">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
-    <div v-for="option in options">
+    <div v-for="(option, index) in options" :key="index">
       <input
         type="checkbox"
         :id="option"
@@ -65,9 +65,12 @@ onMounted(() => {
       <label :for="option.value">{{ option }}</label>
     </div>
     <Transition name="fade" mode="out-in">
-        <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" style="margin-top: 5px;"class="error-sm">{{
-        errorMessage
-        }}</span>
+      <span
+        v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage"
+        style="margin-top: 5px"
+        class="error-sm"
+        >{{ errorMessage }}</span
+      >
     </Transition>
   </div>
 </template>
