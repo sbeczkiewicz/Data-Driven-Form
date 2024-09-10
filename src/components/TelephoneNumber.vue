@@ -16,7 +16,7 @@ const checkDigit = (event: KeyboardEvent) => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper width-sm">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
     <input
       :value="modelValue"

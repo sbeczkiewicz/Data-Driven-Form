@@ -18,8 +18,7 @@ const showErrorMessage = ref(false)
 
 watch(localValue, (newValue) => {
   emit('update:modelValue', newValue)
-  showErrorMessage.value = true
-  validate()
+  validateAndShowMessage()
 })
 
 function validate() {
@@ -34,21 +33,28 @@ function validate() {
   emit('validate', errorMessage.value)
 }
 
+function validateAndShowMessage() {
+    validate()
+    showErrorMessage.value = true
+}
+
 onMounted(() => {
   validate()
 })
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper width-sm">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
-    <select v-model="localValue" @blur="validate">
+    <select v-model="localValue" @blur="validateAndShowMessage">
       <option v-for="option in options" :key="option">
         {{ option }}
       </option>
     </select>
-    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
-      errorMessage
-    }}</span>
+    <Transition name="fade" mode="out-in">
+        <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
+        errorMessage
+        }}</span>
+    </Transition>
   </div>
 </template>

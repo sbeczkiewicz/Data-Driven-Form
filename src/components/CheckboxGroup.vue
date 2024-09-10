@@ -64,8 +64,10 @@ onMounted(() => {
       />
       <label :for="option.value">{{ option }}</label>
     </div>
-    <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" class="error-sm">{{
-      errorMessage
-    }}</span>
+    <Transition name="fade" mode="out-in">
+        <span v-if="(showErrorAtSubmit || showErrorMessage) & !!errorMessage" style="margin-top: 5px;"class="error-sm">{{
+        errorMessage
+        }}</span>
+    </Transition>
   </div>
 </template>

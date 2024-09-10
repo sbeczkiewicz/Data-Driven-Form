@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref, onMounted } from 'vue'
+import { watch, ref } from 'vue'
 const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, required: true },
@@ -32,9 +32,9 @@ function validate() {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper width-lg">
     <label>{{ `${props.required ? '*' : ''} ${props.label}` }}</label>
-    <textarea style="resize: vertical; height: 100px;" v-model="localValue" @blur="validate" />
+    <textarea style="resize: vertical; height: 100px" v-model="localValue" @blur="validate" />
     <span :title="errorMessage" :class="errorMessage ? 'error counter' : 'counter'">{{
       `${props.modelValue ? props.modelValue.length : 0}/500`
     }}</span>
@@ -46,6 +46,6 @@ function validate() {
   color: red;
 }
 .counter {
-    text-align: right;
+  text-align: right;
 }
 </style>
