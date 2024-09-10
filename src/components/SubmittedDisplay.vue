@@ -23,7 +23,6 @@ function formatCamelCase(str) {
 
 <style>
 .display-container {
-  display: grid;
   float: left;
   gap: 12px;
   background-color: #f9f9f9;
@@ -32,14 +31,16 @@ function formatCamelCase(str) {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 400px;
   margin: 16px auto;
-  overflow: hidden;
 }
 
 
 .display-item {
-  display: flex;
   padding: 8px;
   border-bottom: 1px solid #ddd;
+  width: 380px;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .display-item:last-child {
