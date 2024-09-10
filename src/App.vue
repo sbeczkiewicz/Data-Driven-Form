@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { formSchema } from '@/config/formSchema.ts'
-import { ref } from 'vue'
-
-const formData = ref({})
+import { ref, watch, computed } from 'vue'
+import { useFormStore } from '@/stores/formStore'
+import SubmitedDisplay from '@/components/SubmittedDisplay.vue'
 
 const formErrors = ref([])
 
@@ -25,6 +25,21 @@ function handleSubmit() {
     showErrorAtSubmit.value = true
   }
 }
+
+// Centralized State Management
+const formStore = useFormStore()
+
+const formData = computed(() => formStore.formData)
+
+watch(
+  formData,
+  (newData, oldData) => {
+    if (JSON.stringify(newData) !== JSON.stringify(oldData)) {
+      formStore.saveStateToStorage()
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <template>
@@ -44,10 +59,17 @@ function handleSubmit() {
         @validate="handleValidation(field.name, $event)"
       >
       </component>
-      <button type="submit">Submit</button>
+      <hr/>
+      <button style="float: right;" type="submit">Submit</button>
     </form>
-    <div v-else class="wrapper">
-      <span v-for="(value, key) in formData" :key="key">{{ key }}: {{ value }}</span>
-    </div>
+    <SubmitedDisplay v-else></SubmitedDisplay>
   </div>
 </template>
+
+<style>
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+</style>
